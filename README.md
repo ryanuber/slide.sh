@@ -17,7 +17,7 @@ Example:
             use backticks or dollar-parenthesis to execute commands inside
             of the slide!
 
-            Today is $(date +%d)
+            Today is $(date +%A)
     EOF
     slide <<EOF
 
@@ -25,7 +25,7 @@ Example:
 
             My current directory is $PWD
     EOF
-    slide "End of slides - Press enter to quite" <<EOF
+    slide "End of slides - Press enter to quit" <<EOF
 
             ...And that's all you need to know!
     EOF
