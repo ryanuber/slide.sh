@@ -1,7 +1,13 @@
 slide.sh
 ========
 
+Spend less time making slides
+-----------------------------
+
 ![""](http://ryanuber.github.com/slide.sh/slide_demo.gif "")
+
+What is it?
+-----------
 
 slide.sh is a small, basic, kludgy, hackish, ghetto slide maker that
 will execute entirely inside of your shell.
@@ -10,7 +16,10 @@ There are no graphics, no transitions or effects, no cool line
 drawing abilities, or anything like that. Seriously bro, its a shell
 script.
 
-What it provides is the ability to show simulated pages of ASCII text
+Purpose
+-------
+
+What slide.sh provides is the ability to show simulated pages of ASCII text
 inside of your terminal. An advantage to this is that you, as some sort
 of programmer, won't have to take a bunch of screen caps or copy /
 paste text into some full-featured slide creation program to demo the
@@ -18,11 +27,17 @@ core functionality of your executable program in a clean and organized
 way while notating certain things and controlling the flow of your
 presentation.
 
+Uses
+----
+
 Some useful things I've done with slide.sh / can think of for it:
 
 * Demo REST API calls using cURL
 * Demo command-line tool functionality
 * Write some markdown-style slides for basic presentations
+
+Example
+-------
 
 The above demo was created from the following shell script, which just
 sources slide.sh and then makes some slides.
