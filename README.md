@@ -27,6 +27,13 @@ core functionality of your executable program in a clean and organized
 way while notating certain things and controlling the flow of your
 presentation.
 
+Features
+--------
+
+* Pre-formatted text will render exactly as it was produced
+* Text centering for writing titles, page markers, etc.
+* Slide pausing to help demonstrate multi-step processes
+
 Uses
 ----
 
