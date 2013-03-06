@@ -1,19 +1,16 @@
 #!/bin/bash
 
 declare -r TPUT=$(which tput)
-if [ -z "$TPUT" ]; then
-    echo 'tput not found in $PATH'
-    exit 1
-fi
 
-declare -r COLS=$($TPUT cols)
-declare -r ROWS=$($TPUT lines)
-declare -r IFS=''
+[ -n "$TPUT" -a -c /dev/tty ] || exit 1
 
 function slide() {
-    local MESSAGE=${1:-Press return for next slide}
-    local CENTER=0
-    local LINENUM=0
+    local -r IFS=''
+    local -r MESSAGE=${1:-Press return for next slide}
+    local -ri COLS=$($TPUT cols)
+    local -ri ROWS=$($TPUT lines)
+    local -i CENTER=0
+    local -i LINENUM=0
     local KEY=1
 
     $TPUT clear
@@ -26,23 +23,19 @@ function slide() {
             [ "$KEY" == 'q' ] && exit 0
             KEY=1
             continue
-        fi
-        if [ "$LINE" == '!!center' ]; then
+        elif [ "$LINE" == '!!center' ]; then
             CENTER=1
             continue
-        fi
-        if [ "$LINE" == '!!nocenter' ]; then
+        elif [ "$LINE" == '!!nocenter' ]; then
             CENTER=0
             continue
         fi
-        if [ $CENTER -eq 1 ]; then
-            $TPUT cup $LINENUM $((($COLS-$(echo $LINE | wc -c))/2))
-        fi
+        [ $CENTER -eq 1 ] && $TPUT cup $LINENUM $((($COLS-${#LINE})/2))
         echo "$LINE"
         let LINENUM++
     done
     until [ "$KEY" == 'q' -o "$KEY" = '' ]; do
-        $TPUT cup $ROWS $(($COLS-$(echo $MESSAGE | wc -c)))
+        $TPUT cup $ROWS $(($COLS-${#MESSAGE}))
         read -s -n1 -p "$MESSAGE" KEY < /dev/tty
     done
     [ "$KEY" == 'q' ] && exit 0
