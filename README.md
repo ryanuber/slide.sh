@@ -43,6 +43,12 @@ Some useful things I've done with slide.sh / can think of for it:
 * Demo command-line tool functionality
 * Write some markdown-style slides for basic presentations
 
+Requirements
+------------
+
+* A bash shell
+* `tput`
+
 Example
 -------
 
