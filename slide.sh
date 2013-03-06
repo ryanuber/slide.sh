@@ -1,7 +1,10 @@
 #!/bin/bash
 
 declare -r TPUT=$(which tput)
-[ -n "$TPUT" ] || exit 1
+if [ -z "$TPUT" ]; then
+    echo 'tput not found in $PATH'
+    exit 1
+fi
 
 declare -r COLS=$($TPUT cols)
 declare -r ROWS=$($TPUT lines)
@@ -20,7 +23,7 @@ function slide() {
             until [ "$KEY" == 'q' -o "$KEY" = '' ]; do
                 read -s -n1 KEY < /dev/tty
             done
-            [ "$KEY" == "q" ] && exit 0
+            [ "$KEY" == 'q' ] && exit 0
             KEY=1
             continue
         fi
@@ -42,6 +45,6 @@ function slide() {
         $TPUT cup $ROWS $(($COLS-$(echo $MESSAGE | wc -c)))
         read -s -n1 -p "$MESSAGE" KEY < /dev/tty
     done
-    [ "$KEY" == "q" ] && exit 0
+    [ "$KEY" == 'q' ] && exit 0
     $TPUT clear
 }

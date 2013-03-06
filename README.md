@@ -8,8 +8,9 @@ Example:
 
     slide <<EOF
     !!center
-    Save time making your slides with slide.sh
-    Ryan Uber <ru@ryanuber.com>
+    slide.sh
+    Spend less time making slides
+    https://github.com/ryanuber/slide.sh
     EOF
 
     slide <<EOF
