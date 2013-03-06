@@ -2,7 +2,6 @@ slide.sh
 ========
 
 Spend less time making slides
------------------------------
 
 ![""](http://ryanuber.github.com/slide.sh/slide_demo.gif "")
 
