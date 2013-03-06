@@ -32,7 +32,7 @@ function slide() {
         let LINENUM++
     done
     until [ "$KEY" == 'q' -o "$KEY" = '' ]; do
-        $TPUT cup $ROWS $(($COLS-${#MESSAGE}))
+        $TPUT cup $ROWS $((($COLS-1)-${#MESSAGE}))
         read -s -n1 -p "$MESSAGE" KEY < /dev/tty
     done
     [ "$KEY" == 'q' ] && exit 0
