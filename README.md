@@ -32,6 +32,7 @@ Features
 * Pre-formatted text will render exactly as it was produced
 * Text centering for writing titles, page markers, etc.
 * Slide pausing to help demonstrate multi-step processes
+* Slide separators (horizontal rule)
 
 Uses
 ----
