@@ -56,64 +56,63 @@ sources slide.sh and then makes some slides.
 
     #!/bin/bash
     . ./slide.sh
-
+    
     slide <<EOF
     !!center
     slide.sh
     Spend less time making slides
     https://github.com/ryanuber/slide.sh
     EOF
-
+    
     slide <<EOF
-    By default, lines of text appear exactly as you define them.
+    By default, text appears exactly as you entered it.
     EOF
-
+    
     slide <<EOF
     !!center
     Centering Text
-
+    
     In any of your slides, you can insert a line that reads '!!center'. This
     will cause text in the following lines to be centered.
-
+    
     !!nocenter
-    You can use '!!nocenter' at any time to stop centering lines, even in the
-    middle of a slide.
+    You can use '!!nocenter' at any time to stop centering lines
     EOF
-
+    
     slide <<EOF
     !!center
     You can use backticks or dollar-parenthesis to execute commands inside
     of the slide, like this:
-
+    
     Today is \$(date +%A)
-
+    
     evaluates to...
-
+    
     Today is $(date +%A)
     EOF
-
+    
     slide <<EOF
     !!center
     You can also use variables for repetetive information, like this:
-
+    
     The current working directory is \$PWD
-
+    
     evaluates to...
-
+    
     The current working directory is $PWD
     EOF
-
+    
     slide <<EOF
     !!center
     You can press 'q' at any time to quit gracefully out of the slide deck
     EOF
-
-    slide "Check out this custom action message" <<EOF
+    
+    slide 'Check out this custom action message' <<EOF
     !!center
     You can pass a string argument to 'slide' to define a custom action message,
     rather than the default 'next slide' message.
     EOF
-
+    
     slide <<EOF
     You can add pauses inside of each slide for demonstrating things. You can
     advance slide rendering by pressing return. For example, in this slide, there
@@ -123,8 +122,49 @@ sources slide.sh and then makes some slides.
     !!pause
     You can use !!pause as many times as you'd like.
     EOF
-
-    slide "End of slides - Press enter to quit" <<EOF
+    
+    slide <<EOF
+    !!center
+    Separators
+    
+    You can separate parts of a slide by using '!!sep' on a line of its own.
+    !!sep
+    It is useful for packing multiple thoughts or ideas into a single slide.
+    !!sep
+    You could also use it to create a separated header at the top of each slide.
+    You can add as many separators as you want.
+    EOF
+    
+    slide 'Only one more slide to go! ->' <<EOF
+    !!center
+    
+    Putting it all together
+    
+    !!sep
+    
+    This slide demonstrates all of the functionality working together.
+    !!pause
+    
+    
+    I'll show you the time from a few different places around the world.
+    !!pause
+    !!nocenter
+    
+    !!sep
+       California      $(TZ=America/Los_Angeles date)
+       Panama          $(TZ=America/Panama date)
+       Virgin Islands  $(TZ=America/Virgin date)
+       Tahiti          $(TZ=Pacific/Tahiti date)
+       Athens          $(TZ=Europe/Athens date)
+    !!sep
+    
+    !!pause
+    
+    !!center
+    Putting slides together is super-fast and easy!
+    EOF
+    
+    slide 'End of slides - Press enter to quit' <<EOF
     !!center
     ...And that's all you need to know!
     EOF

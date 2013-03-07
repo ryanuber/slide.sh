@@ -4,7 +4,7 @@ function slide() {
     local -r TPUT=$(type -p tput)
     [ -x "$TPUT" ] || exit 1
     local -r IFS=''
-    local -r MESSAGE=${1:-Press return for next slide}
+    local -r MESSAGE=${1:-<Enter> Next Slide | <q> Quit}
     local -ri COLS=$($TPUT cols)
     local -ri ROWS=$($TPUT lines)
     local -i CENTER=0
@@ -15,7 +15,7 @@ function slide() {
     
     while read LINE; do
         if [ "$LINE" == '!!pause' ]; then
-            until [ "$KEY" == 'q' -o "$KEY" = '' ]; do
+            until [ "$KEY" == 'q' -o "$KEY" == '' ]; do
                 read -s -n1 KEY < /dev/tty
             done
             [ "$KEY" == 'q' ] && exit 0 || KEY=1
@@ -25,6 +25,11 @@ function slide() {
             continue
         elif [ "$LINE" == '!!nocenter' ]; then
             CENTER=0
+            continue
+        elif [ "$LINE" == '!!sep' ]; then
+            printf -vLINE "%${COLS}s" ''
+            echo ${LINE// /-}
+            let LINENUM++
             continue
         fi
         [ $CENTER -eq 1 ] && $TPUT cup $LINENUM $((($COLS-${#LINE})/2))
