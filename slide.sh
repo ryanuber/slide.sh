@@ -12,7 +12,8 @@ function slide() {
     local KEY=1
 
     $TPUT clear
-    
+    trap "$TPUT clear" 0
+
     while read LINE; do
         if [ "$LINE" == '!!pause' ]; then
             until [ "$KEY" == 'q' -o "$KEY" == '' ]; do
@@ -41,5 +42,4 @@ function slide() {
         read -s -n1 -p "$MESSAGE" KEY < /dev/tty
     done
     [ "$KEY" == 'q' ] && exit 0
-    $TPUT clear
 }
