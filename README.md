@@ -42,6 +42,7 @@ Some useful things I've done with slide.sh / can think of for it:
 * Demo REST API calls using cURL
 * Demo command-line tool functionality
 * Write some markdown-style slides for basic presentations
+* Share slides with people in a screen session
 
 Requirements
 ------------
