@@ -104,11 +104,6 @@ sources slide.sh and then makes some slides.
     The current working directory is $PWD
     EOF
     
-    slide <<EOF
-    !!center
-    You can press 'q' at any time to quit gracefully out of the slide deck
-    EOF
-    
     slide 'Check out this custom action message' <<EOF
     !!center
     You can pass a string argument to 'slide' to define a custom action message,
