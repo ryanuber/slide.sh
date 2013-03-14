@@ -2,6 +2,7 @@
 function slide() {
     local -r TPUT=$(type -p tput)
     [ -x "$TPUT" ] || exit 1
+    local -r IFS=''
     local -r MESSAGE=${1:-<Enter> Next slide | <ctrl+c> Quit}
     local -ri COLS=$($TPUT cols)
     local -ri ROWS=$($TPUT lines)
