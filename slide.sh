@@ -17,9 +17,10 @@ function slide() {
         [ "$LINE" == '!!nocenter' ] && CENTER=0 && continue
         [ "$LINE" == '!!pause' ] && read -s < /dev/tty && continue
         [ "$LINE" == '!!sep' ] && printf -vLINE "%${COLS}s" '' && LINE=${LINE// /-}
-        [ $CENTER -eq 1 ] && $TPUT cup $LINENUM $((($COLS-${#LINE})/2))
+        [ $CENTER -eq 1 ] && $TPUT cup $LINENUM $((($COLS-${#LINE})/2)) || $TPUT cup $LINENUM 0
         printf "%s\n" "$LINE"
-        let LINENUM++
+        $TPUT cup $ROWS $COLS && let LINENUM++
+        [ ${#LINE} -gt $COLS ] && let LINENUM++
     done
     $TPUT cup $ROWS $((($COLS-1)-${#MESSAGE})) && printf "$MESSAGE"
     read -s < /dev/tty
