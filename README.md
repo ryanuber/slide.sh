@@ -58,7 +58,7 @@ sources slide.sh and then makes some slides.
 
 ```bash
 #!/bin/bash
-. ./slide.sh
+source ./slide.sh
 
 slide <<EOF
 !!center
@@ -133,12 +133,60 @@ You could also use it to create a separated header at the top of each slide.
 You can add as many separators as you want.
 EOF
 
+slide <<EOF
+!!center
+Color
+
+slide.sh supports a number of color options:
+!!nocenter
+!!red
+    !!red
+!!green
+    !!green
+!!blue
+    !!blue
+!!cyan
+    !!cyan
+!!yellow
+    !!yellow
+!!purple
+    !!purple
+!!darkgrey
+    !!darkgrey
+!!nocolor
+    !!nocolor
+
+!!center
+Once you declare a color, text will print in that color until you tell slide.sh
+to stop. Use !!nocolor to stop printing in color at any time.
+EOF
+
+slide <<EOF
+!!center
+Bold Text
+
+!!bold
+By using !!bold, any text printed thereafter will appear in bold, if the
+terminal supports bold text.
+
+!!green
+You can also use colors while in !!bold
+
+!!nocolor
+!!nobold
+Use !!nobold to stop printing bold text.
+EOF
+
 slide 'Only one more slide to go! ->' <<EOF
 !!center
 
+!!cyan
+!!bold
 Putting it all together
-
+!!nobold
+!!green
 !!sep
+!!nocolor
 
 This slide demonstrates all of the functionality working together.
 !!pause
@@ -159,6 +207,7 @@ I'll show you the time from a few different places around the world.
 !!pause
 
 !!center
+!!bold
 Putting slides together is super-fast and easy!
 EOF
 
