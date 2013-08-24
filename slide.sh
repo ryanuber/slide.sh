@@ -32,7 +32,7 @@ function slide() {
         [ ${#MESSAGE} -lt $COLS ]   && MSGPOS=$(((COLS-1)-${#MESSAGE}))
         [ ${#LINE} -le $COLS ]      && CTRPOS=$(((COLS-${#LINE})/2))
         [ $CENTER -eq 1 ] && $TPUT cup $LINENUM $CTRPOS || $TPUT cup $LINENUM 0
-        printf "\033[${BOLD}${COLOR}m${LINE}\033[0m\n"
+        printf "\033[${BOLD}${COLOR}m${LINE//%/%%}\033[0m\n"
         [ "$COLOR" == ';0' ] && COLOR=''
         $TPUT cup $ROWS $COLS && let LINENUM++
         [ ${#LINE} -gt $COLS ] && let LINENUM++
