@@ -37,6 +37,6 @@ function slide() {
         $TPUT cup $ROWS $COLS && let LINENUM++
         [ ${#LINE} -gt $COLS ] && let LINENUM++
     done
-    $TPUT cup $ROWS $MSGPOS && printf "\033[0m$MESSAGE"
+    $TPUT cup $ROWS $MSGPOS && printf "\033[0m${MESSAGE}"
     read -s < /dev/tty
 }
