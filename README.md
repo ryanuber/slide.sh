@@ -3,7 +3,7 @@ slide.sh
 
 Spend less time making slides
 
-![""](http://ryanuber.github.com/assets/projects/slide_demo.gif "")
+![""](../blob/gh-pages/slide_demo.gif "")
 
 What is it?
 -----------
