@@ -9,7 +9,6 @@ function slide() {
     local -ri ROWS=$($TPUT lines)
     local -i CENTER=0
     local -i LINENUM=0
-    local -i BOLD=0
     local -i CTRPOS=0
     local -i MSGPOS=0
     local -i HASCOLOR=1
