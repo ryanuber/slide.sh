@@ -62,7 +62,8 @@ source ./slide.sh
 
 slide <<EOF
 !!center
-slide.sh
+<green>slide.sh<end>
+
 Spend less time making slides
 https://github.com/ryanuber/slide.sh
 EOF
