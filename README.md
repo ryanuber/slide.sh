@@ -135,58 +135,31 @@ EOF
 
 slide <<EOF
 !!center
-Color
+<red>C<green>o<yellow>l<blue>o<purple>r<end>
 
 slide.sh supports a number of color options:
 !!nocenter
-!!red
-    !!red
-!!green
-    !!green
-!!blue
-    !!blue
-!!cyan
-    !!cyan
-!!yellow
-    !!yellow
-!!purple
-    !!purple
-!!darkgrey
-    !!darkgrey
-!!nocolor
-    !!nocolor
+    <red>red<end>
+    <green>green<end>
+    <blue>blue<end>
+    <cyan>cyan<end>
+    <yellow>yellow<end>
+    <purple>purple<end>
+    <darkgrey>darkgrey<end>
 
 !!center
-Once you declare a color, text will print in that color until you tell slide.sh
-to stop. Use !!nocolor to stop printing in color at any time.
-EOF
-
-slide <<EOF
-!!center
-Bold Text
-
-!!bold
-By using !!bold, any text printed thereafter will appear in bold, if the
-terminal supports bold text.
-
-!!green
-You can also use colors while in !!bold
-
 !!nocolor
-!!nobold
-Use !!nobold to stop printing bold text.
+You can use !!nocolor to disable colors, and !!color to re-enable it later.
+
+Colors are invoked using "<colorname>". So for example, <red> would give you red
+text until the next <colorname> or <end> is encountered.
 EOF
 
 slide 'Only one more slide to go! ->' <<EOF
 !!center
 
-!!cyan
-!!bold
-Putting it all together
-!!nobold
-!!green
-!!sep
-!!nocolor
+<cyan>Putting it all together<end>
+<green>!!sep<end>
 
 This slide demonstrates all of the functionality working together.
 !!pause
@@ -207,7 +180,6 @@ I'll show you the time from a few different places around the world.
 !!pause
 
 !!center
-!!bold
 Putting slides together is super-fast and easy!
 EOF
 
