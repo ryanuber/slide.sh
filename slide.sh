@@ -1,8 +1,8 @@
 #!/bin/bash
 function slide() {
-    shopt -s extglob
     local -r TPUT=$(type -p tput)
     [ -x "$TPUT" ] || exit 1
+    shopt -s extglob
     local -r IFS=''
     local -r MESSAGE=${1:-<Enter> Next slide | <ctrl+c> Quit}
     local -ri COLS=$($TPUT cols)
@@ -13,6 +13,7 @@ function slide() {
     local -i MSGPOS=0
     local -i HASCOLOR=1
     local COLOR=''
+    local BARE=''
     trap "$TPUT clear" 0
     $TPUT clear
     while read LINE; do
