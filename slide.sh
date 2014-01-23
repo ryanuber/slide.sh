@@ -2,7 +2,6 @@
 function slide() {
     local -r TPUT=$(type -p tput)
     [ -x "$TPUT" ] || exit 1
-    shopt -s extglob
     local -r IFS=''
     local -r MESSAGE=${1:-<Enter> Next slide | <ctrl+c> Quit}
     local -ri COLS=$($TPUT cols)
@@ -20,13 +19,12 @@ function slide() {
     while read LINE; do
         [ "$LINE" == '!!color' ] && HASCOLOR=1 && continue
         [ "$LINE" == '!!nocolor' ] && HASCOLOR=0 && continue
+        BARE=$LINE
         if [ $HASCOLOR -eq 1 ]; then
-            BARE=${LINE//<+([a-z])>/}
             for C in ${COLORS[@]}; do
+                BARE=${BARE//<${C%%=*}>/}
                 LINE=${LINE//<${C%%=*}>/\\033\[0\;${C##*=}m}
             done
-        else
-            BARE=$LINE
         fi
         [ "$BARE" == '!!center' ] && CENTER=1 && continue
         [ "$BARE" == '!!nocenter' ] && CENTER=0 && continue
