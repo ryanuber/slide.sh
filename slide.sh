@@ -12,7 +12,6 @@ function slide() {
     local -i MSGPOS=0
     local -i HASCOLOR=1
     local -r COLORS=(red=31 green=32 yellow=33 blue=34 purple=35 cyan=36 end=)
-    local COLOR=''
     local BARE=''
     trap "$TPUT clear" 0
     $TPUT clear
@@ -37,7 +36,6 @@ function slide() {
         [ ${#BARE} -le $COLS ] && CTRPOS=$(((COLS-${#BARE})/2))
         [ $CENTER -eq 1 ] && $TPUT cup $LINENUM $CTRPOS || $TPUT cup $LINENUM 0
         printf -- "${LINE//%/%%}\n"
-        [ "$COLOR" == ';0' ] && COLOR=''
         $TPUT cup $ROWS $COLS && let LINENUM++
         [ ${#BARE} -gt $COLS ] && let LINENUM++
     done
