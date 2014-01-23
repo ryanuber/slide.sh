@@ -2,17 +2,11 @@
 function slide() {
     local -r TPUT=$(type -p tput)
     [ -x "$TPUT" ] || exit 1
-    local -r IFS=''
-    local -r MESSAGE=${1:-<Enter> Next slide | <ctrl+c> Quit}
-    local -ri COLS=$($TPUT cols)
-    local -ri ROWS=$($TPUT lines)
-    local -i CENTER=0
-    local -i LINENUM=0
-    local -i CTRPOS=0
-    local -i MSGPOS=0
-    local -i HASCOLOR=1
+    local -r IFS='' MESSAGE=${1:-<Enter> Next slide | <ctrl+c> Quit}
     local -r COLORS=(red=31 green=32 yellow=33 blue=34 purple=35 cyan=36 end=)
-    local BARE=''
+    local -ri COLS=$($TPUT cols) ROWS=$($TPUT lines)
+    local -i CENTER=0 LINENUM=0 CTRPOS=0 MSGPOS=0 HASCOLOR=1
+    local LINE='' BARE=''
     trap "$TPUT clear" 0
     $TPUT clear
     while read LINE; do

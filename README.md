@@ -18,6 +18,15 @@ script.
 Purpose
 -------
 
+`slide.sh` began as an experiment in what the bash shell is capable of all on
+its own, and attempts to do something cool without assuming that there are a
+slew of commands at your disposal. There only requirement outside of bash itself
+is the `tput` command, since bash doesn't provide the needed capabilities to
+move the cursor about the screen freely.
+
+Functionality
+-------------
+
 What slide.sh provides is the ability to show simulated pages of ASCII text
 inside of your terminal. An advantage to this is that you, as some sort
 of programmer, won't have to take a bunch of screen caps or copy /
