@@ -146,7 +146,6 @@ slide.sh supports a number of color options:
     <cyan>cyan<end>
     <yellow>yellow<end>
     <purple>purple<end>
-    <darkgrey>darkgrey<end>
 
 !!center
 !!nocolor

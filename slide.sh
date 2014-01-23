@@ -12,6 +12,7 @@ function slide() {
     local -i CTRPOS=0
     local -i MSGPOS=0
     local -i HASCOLOR=1
+    local -r COLORS=(red=31 green=32 yellow=33 blue=34 purple=35 cyan=36 end=)
     local COLOR=''
     local BARE=''
     trap "$TPUT clear" 0
@@ -21,14 +22,9 @@ function slide() {
         [ "$LINE" == '!!nocolor' ] && HASCOLOR=0 && continue
         if [ $HASCOLOR -eq 1 ]; then
             BARE=${LINE//<+([a-z])>/}
-            LINE=${LINE//<red>/\\033[0;31m}
-            LINE=${LINE//<green>/\\033[0;32m}
-            LINE=${LINE//<yellow>/\\033[0;33m}
-            LINE=${LINE//<blue>/\\033[0;34m}
-            LINE=${LINE//<purple>/\\033[0;35m}
-            LINE=${LINE//<cyan>/\\033[0;36m}
-            LINE=${LINE//<darkgrey>/\\033[0;30m}
-            LINE=${LINE//<end>/\\033[0m}
+            for C in ${COLORS[@]}; do
+                LINE=${LINE//<${C%%=*}>/\\033\[0\;${C##*=}m}
+            done
         else
             BARE=$LINE
         fi
