@@ -3,7 +3,7 @@ slide.sh
 
 Spend less time making slides
 
-![""](slide_demo.gif)
+![""](https://raw.githubusercontent.com/ryanuber/slide.sh/master/slide_demo.gif)
 
 What is it?
 -----------
