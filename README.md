@@ -42,6 +42,8 @@ Features
 * Text centering for writing titles, page markers, etc.
 * Slide pausing to help demonstrate multi-step processes
 * Slide separators (horizontal rule)
+* Current slide/total slides (ratio and percentage completed)
+* Animation for loading slides
 
 Uses
 ----
