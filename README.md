@@ -2,8 +2,10 @@ slide.sh
 ========
 
 Spend less time making slides
-
-![""](https://raw.githubusercontent.com/ryanuber/slide.sh/master/slide_demo.gif)
+<p align="center">
+  <img src="/slide_demo.gif">
+</p>
+![""](/slide_demo.gif)
 
 What is it?
 -----------
