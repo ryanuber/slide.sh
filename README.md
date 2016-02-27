@@ -5,7 +5,6 @@ Spend less time making slides
 <p align="center">
   <img src="/slide_demo.gif">
 </p>
-![""](/slide_demo.gif)
 
 What is it?
 -----------
