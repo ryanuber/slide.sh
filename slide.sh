@@ -2,7 +2,6 @@
 
 let CURRENTPAGE=0
 let TOTALSLIDES=$(grep "<<EOF" slideshow.sh | wc -l | tr -d " ")
-echo "Use \"source ./slide.sh\" on the top of your shell slidedeck to use this!"
 function slide() {
     clear
     local -r TPUT=$(type -p tput)
