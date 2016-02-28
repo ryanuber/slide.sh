@@ -1,74 +1,3 @@
-slide.sh
-========
-
-Spend less time making slides
-<p align="center">
-  <img src="/slide_demo.gif">
-</p>
-
-What is it?
------------
-
-slide.sh is a small, basic, kludgy, hackish, ghetto slide maker that
-will execute entirely inside of your shell.
-
-There are no graphics, no transitions or effects, no cool line
-drawing abilities, or anything like that. Seriously bro, its a shell
-script.
-
-Purpose
--------
-
-`slide.sh` began as an experiment in what the bash shell is capable of all on
-its own, and attempts to do something cool without assuming that there are a
-slew of commands at your disposal. There only requirement outside of bash itself
-is the `tput` command, since bash doesn't provide the needed capabilities to
-move the cursor about the screen freely.
-
-Functionality
--------------
-
-What slide.sh provides is the ability to show simulated pages of ASCII text
-inside of your terminal. An advantage to this is that you, as some sort
-of programmer, won't have to take a bunch of screen caps or copy /
-paste text into some full-featured slide creation program to demo the
-core functionality of your executable program in a clean and organized
-way while notating certain things and controlling the flow of your
-presentation.
-
-Features
---------
-
-* Pre-formatted text will render exactly as it was produced
-* Text centering for writing titles, page markers, etc.
-* Slide pausing to help demonstrate multi-step processes
-* Slide separators (horizontal rule)
-* Current slide/total slides (ratio and percentage completed)
-* Animation for loading slides
-
-Uses
-----
-
-Some useful things I've done with slide.sh / can think of for it:
-
-* Demo REST API calls using cURL
-* Demo command-line tool functionality
-* Write some markdown-style slides for basic presentations
-* Share slides with people in a `screen` session
-
-Requirements
-------------
-
-* A bash shell
-* `tput`
-
-Example
--------
-
-The above demo was created from the following shell script, which just
-sources slide.sh and then makes some slides.
-
-```bash
 #!/bin/bash
 source ./slide.sh
 
@@ -199,4 +128,3 @@ slide 'End of slides - Press enter to quit' <<EOF
 !!center
 ...And that's all you need to know!
 EOF
-```
