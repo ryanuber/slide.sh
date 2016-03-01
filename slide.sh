@@ -36,3 +36,14 @@ function slide() {
     $TPUT cup $ROWS $MSGPOS && printf "\033[0m${MESSAGE}"
     read -s < /dev/tty
 }
+
+function deck() {
+    local -r FILES=($1/*.slide)
+    local -ri TOTAL=${#FILES[@]}
+    for ((i=0;i<$TOTAL;i++)); do
+        FILE=${FILES[$i]}
+        MSG="Slide $((i+1))/$TOTAL | <Enter> Next | <ctrl+c> Quit"
+        CONTENT=$(<$FILE)
+        eval "echo \"${CONTENT//\"/\\\"}\"" | slide "$MSG"
+    done
+}

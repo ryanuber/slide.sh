@@ -42,9 +42,46 @@ Features
 * Text centering for writing titles, page markers, etc.
 * Slide pausing to help demonstrate multi-step processes
 * Slide separators (horizontal rule)
+* Structured "decks" using directories of files.
 
-Uses
-----
+Usage
+-----
+
+There are two functions provided by this library. Each has a different scope:
+
+```
+slide <optional message>
+```
+
+This command displays a single slide of text. The optional message is displayed
+at the bottom of the screen in place of the default, which explains controls.
+This command takes slide content from STDIN, so you can pipe slides into it or
+use a heredoc for a better inline UX. It is typical to make many calls to
+`slide` from within the same file to simulate a slide "deck", displaying one
+after the other.
+
+```
+deck <directory of *.slide files>
+```
+
+The `deck` command is a very simple wrapper over the `slide` command. It looks
+at the given directory for files ending in `.slide`, and composes a slide "deck"
+using their contents, one file per slide. There are a few important things to
+note when using this command:
+
+* Each slide file is passed through the shell for evaluation. This allows you
+  to continue using command or variable expansion in the same exact format you
+  normally would with slide.sh.
+* All usual slide.sh markup is supported, so you can still do, for example,
+  `!!center` to get centered text within a slide file.
+* Slide numbers (for the slide index at the bottom of the display) are counted
+  at the time the `deck` command is run. Any changes to the files in the given
+  directory will cause undefined behavior.
+* Slides are loaded in lexical order. To order slides, rename them so the sort
+  in the order you desire.
+
+Use Cases
+---------
 
 Some useful things I've done with slide.sh / can think of for it:
 
