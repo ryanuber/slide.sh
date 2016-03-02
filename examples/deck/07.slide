@@ -1,0 +1,9 @@
+!!center
+Separators
+
+You can separate parts of a slide by using '!!sep' on a line of its own.
+!!sep
+It is useful for packing multiple thoughts or ideas into a single slide.
+!!sep
+You could also use it to create a separated header at the top of each slide.
+You can add as many separators as you want.

@@ -1,0 +1,25 @@
+!!center
+
+<cyan>Putting it all together<end>
+<green>!!sep<end>
+
+This slide demonstrates all of the functionality working together.
+!!pause
+
+
+I'll show you the time from a few different places around the world.
+!!pause
+!!nocenter
+
+!!sep
+   California      $(TZ=America/Los_Angeles date)
+   Panama          $(TZ=America/Panama date)
+   Virgin Islands  $(TZ=America/Virgin date)
+   Tahiti          $(TZ=Pacific/Tahiti date)
+   Athens          $(TZ=Europe/Athens date)
+!!sep
+
+!!pause
+
+!!center
+Putting slides together is super-fast and easy!

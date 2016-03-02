@@ -1,0 +1,9 @@
+!!center
+You can use backticks or dollar-parenthesis to execute commands inside
+of the slide, like this:
+
+Today is \$(date +%A)
+
+evaluates to...
+
+Today is $(date +%A)

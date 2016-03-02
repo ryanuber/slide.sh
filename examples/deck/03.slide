@@ -1,0 +1,8 @@
+!!center
+Centering Text
+
+In any of your slides, you can insert a line that reads '!!center'. This
+will cause text in the following lines to be centered.
+
+!!nocenter
+You can use '!!nocenter' at any time to stop centering lines
