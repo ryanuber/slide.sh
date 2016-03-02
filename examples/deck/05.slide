@@ -1,0 +1,8 @@
+!!center
+You can also use variables for repetetive information, like this:
+
+The current working directory is \$PWD
+
+evaluates to...
+
+The current working directory is $PWD

@@ -1,0 +1,7 @@
+You can add pauses inside of each slide for demonstrating things. You can
+advance slide rendering by pressing return. For example, in this slide, there
+should be a pause immediately after this sentence.
+!!pause
+Did it pause? Cool! It should pause one more time following this sentence.
+!!pause
+You can use !!pause as many times as you'd like.

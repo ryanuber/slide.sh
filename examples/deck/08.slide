@@ -1,0 +1,18 @@
+!!center
+<red>C<green>o<yellow>l<blue>o<purple>r<end>
+
+slide.sh supports a number of color options:
+!!nocenter
+    <red>red<end>
+    <green>green<end>
+    <blue>blue<end>
+    <cyan>cyan<end>
+    <yellow>yellow<end>
+    <purple>purple<end>
+
+!!center
+!!nocolor
+You can use !!nocolor to disable colors, and !!color to re-enable it later.
+
+Colors are invoked using "<colorname>". So for example, <red> would give you red
+text until the next <colorname> or <end> is encountered.
