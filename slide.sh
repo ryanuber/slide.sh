@@ -2,7 +2,7 @@
 function slide() {
     local -r TPUT=$(type -p tput)
     [ -x "$TPUT" ] || exit 1
-    local -r IFS='' MESSAGE=${1:-<Enter> Next slide | <ctrl+c> Quit}
+    local -r IFS='' MESSAGE=${1:-↲ Next | ^c Quit}
     local -r COLORS=(red=31 green=32 yellow=33 blue=34 purple=35 cyan=36 end=)
     local -ri COLS=$($TPUT cols) ROWS=$($TPUT lines)
     local -i CENTER=0 LINENUM=0 CTRPOS=0 MSGPOS=0 HASCOLOR=1
@@ -54,14 +54,13 @@ function deck() {
         [ $i -lt 1 ] && i=1
         [ $i -gt $TOTAL ] && i=$TOTAL
         FILE=${FILES[$((i-1))]}
-        MSG="Slide ${i}/${TOTAL} | <Enter> Next | <Backspace> Previous | <0..${TOTAL}> Jump | <ctrl+c> Quit"
+        MSG="Slide ${i}/${TOTAL} | ↲ Next | ← Back | 0..${TOTAL} Jump | ^c Quit"
         CONTENT=$(<$FILE)
         eval "echo \"${CONTENT//\"/\\\"}\"" | slide "$MSG"
-        CMD=$?
-        case $CMD in
+        case $? in
             255) i=$((i-1)) ;;
             0)   i=$((i+1)) ;;
-            *)   i=$CMD     ;;
+            *)   i=$?       ;;
         esac
     done
 }
