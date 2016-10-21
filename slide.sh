@@ -34,16 +34,32 @@ function slide() {
         [ ${#BARE} -gt $COLS ] && let LINENUM++
     done
     $TPUT cup $ROWS $MSGPOS && printf "\033[0m${MESSAGE}"
-    read -s < /dev/tty
 }
 
 function deck() {
     local -r FILES=($1/*.slide)
     local -ri TOTAL=${#FILES[@]}
-    for ((i=0;i<$TOTAL;i++)); do
+    re='^[0-9]+$'
+    i=0
+    while [ $TOTAL -gt $i ]; do
+	if [ $i -lt 0 ]; then
+            i=0
+	fi
         FILE=${FILES[$i]}
-        MSG="Slide $((i+1))/$TOTAL | <Enter> Next | <ctrl+c> Quit"
+	MSG="Slide $(($i+1))/$TOTAL | b<Enter> Before | <Enter> Next | <ctrl+c> Quit"
         CONTENT=$(<$FILE)
         eval "echo \"${CONTENT//\"/\\\"}\"" | slide "$MSG"
+        read -s ACTION < /dev/tty
+	if [ -z $ACTION ]; then
+            i=$(($i+1))
+	else
+            if [ $ACTION == "b" ]; then
+                i=$(($i-1))
+            elif [[ $ACTION =~ $re ]] ; then
+                i=$(($ACTION-1))
+            else
+                i=$(($i+1))
+            fi
+	fi
     done
 }
