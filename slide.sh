@@ -33,9 +33,9 @@ function slide() {
         $TPUT cup $ROWS $COLS && let LINENUM++
         [ ${#BARE} -gt $COLS ] && let LINENUM++
     done
-    for ((GOTO=0;;)); do
+    for ((GOTO=0;;${GOTO:=0})); do
         $TPUT cup $ROWS 0 && printf "%${MSGPOS}s\033[0m%s" " " $MESSAGE
-        [ $GOTO -gt 0 ] && $TPUT cup $ROWS 0 && printf "\033[0mJump: ${GOTO}"
+        [ ${GOTO} -gt 0 ] && $TPUT cup $ROWS 0 && printf "\033[0mJump: ${GOTO}"
         read -s -n 1 CHAR < /dev/tty
         case $CHAR in
             $'\033')     GOTO=0                                          ;;
@@ -50,16 +50,11 @@ function deck() {
     local -r FILES=($1/*.slide)
     local -ri TOTAL=${#FILES[@]}
     [ $TOTAL -gt 254 ] && TOTAL=254
-    for ((i=1;;)); do
-        i=$((i>TOTAL?TOTAL:(i<1?1:i)))
+    for ((i=1;;i=$((i>TOTAL?TOTAL:(i<1?1:i))))); do
         FILE=${FILES[$((i-1))]}
         MSG="Slide ${i}/${TOTAL} | ↲ Next | ← Back | 1..${TOTAL} Jump | ^c Quit"
         CONTENT=$(<$FILE)
         eval "echo \"${CONTENT//\"/\\\"}\"" | slide "$MSG"
-        case $? in
-            255) let i-- ;;
-            0)   let i++ ;;
-            *)   i=$?    ;;
-        esac
+        i=$(($?==255?(i-1):($?==0?i+1:$?)))
     done
 }
