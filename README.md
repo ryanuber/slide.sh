@@ -60,6 +60,16 @@ use a heredoc for a better inline UX. It is typical to make many calls to
 `slide` from within the same file to simulate a slide "deck", displaying one
 after the other.
 
+The exit code from `slide` represents the character which was entered on the
+keyboard at exit time. Specifically:
+
+    * `0`: Enter, or an unrecognized character.
+    * `255`: Backspace
+    * `1..254`: Typed number followed by the Enter key.
+
+Typically the return code is ignored by the caller, but it can be used by other
+programs to provide navigation if desired (see the `deck` command, for example).
+
 ```
 deck <directory of *.slide files>
 ```
@@ -79,6 +89,7 @@ note when using this command:
   directory will cause undefined behavior.
 * Slides are loaded in lexical order. To order slides, rename them so the sort
   in the order you desire.
+* Slide navigation supports 254 slides at the max.
 
 Use Cases
 ---------
