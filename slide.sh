@@ -42,7 +42,7 @@ function deck() {
     re='^[0-9]+$'
     i=0
     while [ $TOTAL -gt $i ]; do
-	if [ $i -lt 0]; then
+	if [ $i -lt 0 ]; then
             i=0
 	fi
         FILE=${FILES[$i]}
