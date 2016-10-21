@@ -35,6 +35,16 @@ core functionality of your executable program in a clean and organized
 way while notating certain things and controlling the flow of your
 presentation.
 
+Navigation
+----------
+
+You con browser the slides with the following commands:
+* `<enter>`: go to next slide;
+* `b + <enter>`: go to the slide before;
+* `<digit> + <enter>`: go to the slide number <digit>;
+* `<ctrl>c`: quit the presentation.
+
+
 Features
 --------
 
