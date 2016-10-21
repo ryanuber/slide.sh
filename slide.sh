@@ -51,16 +51,15 @@ function deck() {
     local -ri TOTAL=${#FILES[@]}
     [ $TOTAL -gt 254 ] && TOTAL=254
     for ((i=1;;)); do
-        [ $i -lt 1 ] && i=1
-        [ $i -gt $TOTAL ] && i=$TOTAL
+        i=$((i>TOTAL?TOTAL:(i<1?1:i)))
         FILE=${FILES[$((i-1))]}
-        MSG="Slide ${i}/${TOTAL} | ↲ Next | ← Back | 0..${TOTAL} Jump | ^c Quit"
+        MSG="Slide ${i}/${TOTAL} | ↲ Next | ← Back | 1..${TOTAL} Jump | ^c Quit"
         CONTENT=$(<$FILE)
         eval "echo \"${CONTENT//\"/\\\"}\"" | slide "$MSG"
         case $? in
-            255) i=$((i-1)) ;;
-            0)   i=$((i+1)) ;;
-            *)   i=$?       ;;
+            255) let i-- ;;
+            0)   let i++ ;;
+            *)   i=$?    ;;
         esac
     done
 }
