@@ -33,14 +33,15 @@ function slide() {
         $TPUT cup $ROWS $COLS && let LINENUM++
         [ ${#BARE} -gt $COLS ] && let LINENUM++
     done
-    $TPUT cup $ROWS $MSGPOS && printf "\033[0m${MESSAGE}"
     for ((GOTO=0;;)); do
-        [ $GOTO -gt 254 ] && GOTO=254
+        $TPUT cup $ROWS 0 && printf "%${MSGPOS}s\033[0m%s" " " $MESSAGE
+        [ $GOTO -gt 0 ] && $TPUT cup $ROWS 0 && printf "\033[0mJump: ${GOTO}"
         read -s -n 1 CHAR < /dev/tty
         case $CHAR in
-            $'\177')     return 255   ;;
-            [[:digit:]]) GOTO+=$CHAR  ;;
-            *)           return $GOTO ;;
+            $'\033')     GOTO=0                                          ;;
+            $'\177')     [ $GOTO -eq 0 ] && return 255 || GOTO=${GOTO%?} ;;
+            [[:digit:]]) [ $GOTO -eq 0 ] && GOTO=$CHAR || GOTO+=$CHAR    ;;
+            *)           [ $GOTO -gt 254 ] && return 254 || return $GOTO ;;
         esac
     done
 }
