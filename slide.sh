@@ -34,16 +34,33 @@ function slide() {
         [ ${#BARE} -gt $COLS ] && let LINENUM++
     done
     $TPUT cup $ROWS $MSGPOS && printf "\033[0m${MESSAGE}"
-    read -s < /dev/tty
+    for ((GOTO=0;;)); do
+        [ $GOTO -gt 254 ] && GOTO=254
+        read -s -n 1 CHAR < /dev/tty
+        case $CHAR in
+            $'\177')     return 255   ;;
+            [[:digit:]]) GOTO+=$CHAR  ;;
+            *)           return $GOTO ;;
+        esac
+    done
 }
 
 function deck() {
     local -r FILES=($1/*.slide)
     local -ri TOTAL=${#FILES[@]}
-    for ((i=0;i<$TOTAL;i++)); do
-        FILE=${FILES[$i]}
-        MSG="Slide $((i+1))/$TOTAL | <Enter> Next | <ctrl+c> Quit"
+    [ $TOTAL -gt 254 ] && TOTAL=254
+    for ((i=1;;)); do
+        [ $i -lt 1 ] && i=1
+        [ $i -gt $TOTAL ] && i=$TOTAL
+        FILE=${FILES[$((i-1))]}
+        MSG="Slide ${i}/${TOTAL} | <Enter> Next | <Backspace> Previous | <0..${TOTAL}> Jump | <ctrl+c> Quit"
         CONTENT=$(<$FILE)
         eval "echo \"${CONTENT//\"/\\\"}\"" | slide "$MSG"
+        CMD=$?
+        case $CMD in
+            255) i=$((i-1)) ;;
+            0)   i=$((i+1)) ;;
+            *)   i=$CMD     ;;
+        esac
     done
 }
