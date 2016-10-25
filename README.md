@@ -24,6 +24,12 @@ slew of commands at your disposal. There only requirement outside of bash itself
 is the `tput` command, since bash doesn't provide the needed capabilities to
 move the cursor about the screen freely.
 
+Secondarily, `slide.sh` is an experiment in feature density vs. code footprint.
+Complex conditions, pattern matching, string slicing, etc. are all done in the
+most terse way possible while remaining readable by humans. This isn't to say
+that this is a superior style, but rather a way of learning the bash shell's
+built-ins deeply in a real way.
+
 Functionality
 -------------
 
