@@ -1,7 +1,6 @@
 #!/bin/bash
 function slide() {
-    local -r TPUT=$(type -p tput)
-    [ -x "$TPUT" ] || exit 1
+    local -r TPUT=$(type -p tput || kill -9 $$)
     local -r IFS='' MESSAGE=${1:-↲ Next | ^c Quit}
     local -r COLORS=(red=31 green=32 yellow=33 blue=34 purple=35 cyan=36 end=)
     local -ri COLS=$($TPUT cols) ROWS=$($TPUT lines)
@@ -9,10 +8,9 @@ function slide() {
     local LINE='' BARE=''
     trap "$TPUT clear" 0
     $TPUT clear
-    while read LINE; do
+    while read LINE && BARE=$LINE; do
         [ "$LINE" == '!!color' ] && HASCOLOR=1 && continue
         [ "$LINE" == '!!nocolor' ] && HASCOLOR=0 && continue
-        BARE=$LINE
         if [ $HASCOLOR -eq 1 ]; then
             for C in ${COLORS[@]}; do
                 BARE=${BARE//<${C%%=*}>/}
@@ -38,22 +36,20 @@ function slide() {
         [ ${GOTO} -gt 0 ] && $TPUT cup $ROWS 0 && printf "\033[0mJump: ${GOTO}"
         read -s -n 1 CHAR < /dev/tty
         case $CHAR in
-            $'\033')     GOTO=0                                          ;;
-            $'\177')     [ $GOTO -eq 0 ] && return 255 || GOTO=${GOTO%?} ;;
-            [[:digit:]]) [ $GOTO -eq 0 ] && GOTO=$CHAR || GOTO+=$CHAR    ;;
-            *)           [ $GOTO -gt 254 ] && return 254 || return $GOTO ;;
+            $'\033') GOTO=0                                          ;;
+            $'\177') [ $GOTO -eq 0 ] && return 255 || GOTO=${GOTO%?} ;;
+            [0-9]*)  [ $GOTO -eq 0 ] && GOTO=$CHAR || GOTO+=$CHAR    ;;
+            *)       [ $GOTO -gt 254 ] && return 254 || return $GOTO ;;
         esac
     done
 }
 
 function deck() {
-    local -r FILES=($1/*.slide)
-    local -ri TOTAL=${#FILES[@]}
-    [ $TOTAL -gt 254 ] && TOTAL=254
+    local -ra FILES=($1/*.slide)
+    local -ri TOTAL=$((${#FILES[@]}>254?254:${#FILES[@]}))
     for ((i=1;;i=$((i>TOTAL?TOTAL:(i<1?1:i))))); do
-        FILE=${FILES[$((i-1))]}
+        CONTENT=$(<${FILES[$((i-1))]})
         MSG="Slide ${i}/${TOTAL} | ↲ Next | ← Back | 1..${TOTAL} Jump | ^c Quit"
-        CONTENT=$(<$FILE)
         eval "echo \"${CONTENT//\"/\\\"}\"" | slide "$MSG"
         i=$(($?==255?(i-1):($?==0?i+1:$?)))
     done
